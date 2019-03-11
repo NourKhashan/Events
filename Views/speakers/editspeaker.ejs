@@ -1,0 +1,51 @@
+<%- include('../headerAdmin.ejs') %>
+
+
+
+
+
+
+
+<div class="section-top-border">
+		<div class="row">
+			<div class="col-lg-6 text-center mx-auto">
+				<h3 class="mb-30">Edit Speaker</h3>
+				<form  method="POST" action="/speakers/edit/<%=speaker._id%>" enctype="multipart/form-data" >
+					<div class="mt-10">
+						<img src="/images/<%=speaker.image%>" style="width:100px; height:100px;"/>
+					</div>
+					<div class="mt-10">
+							<input type="text" disabled name="id" value="<%=speaker._id%>" placeholder="ID"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'"  class="single-input">
+	
+					</div>
+					<div class="mt-10">
+							<input type="text"  name="name" value="<%=speaker.name%>" placeholder="Name"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'"  class="single-input">
+	
+					</div>
+					<div class="mt-10">
+							<input type="number"  name="age" value="<%=speaker.age%>" placeholder="Name"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'"  class="single-input">
+	
+					</div>
+					<div class="mt-10">
+
+						<input type="file" name="image" />
+					</div>
+					
+					
+	
+				<input type="submit" value="Update" class="genric-btn success"/>
+				<a href="/speakers/listEvents"  class="genric-btn success"> Cancel</a>
+	
+				</div>
+	
+				</form>
+			</div>
+			
+			
+		</div>
+	</div>
+
+
+
+
+	<%- include('../footer') %>

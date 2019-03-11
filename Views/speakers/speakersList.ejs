@@ -1,0 +1,61 @@
+<%- include('../headerAdmin.ejs') %>
+
+
+        <div class="section-top-border text-center mx-auto">
+          <h3 class="mb-30">Speakers List</h3>
+          <div class="table-wrap text-center col-lg-12">
+              <table class="schdule-table table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                        <th class="name" scope="row">#</th>
+                        <th class="name" scope="row">Name</th>
+                        <th class="name" scope="row">Age</th>
+                        <th class="name" scope="row"></th>
+                        <th class="name" scope="row"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                 <% speakers.forEach((speaker)=>{ %>
+                  <tr>
+                    <td><%=speaker._id%></td>
+                    <td><%=speaker.name%></td>
+                    <td><%=speaker.age%></td>
+                    <td><img src="/images/<%=speaker.image%>" style="width:100px; height:100px;"/></td>
+                    <td><a href="/speakers/edit/<%=speaker._id%>" class="btn btn-primary">EDIT</a></td>
+                    <td><a href="/speakers/delete/<%=speaker._id%>" class="btn btn-danger">Delete</a></td>
+                    <td> <button type="button" class="btn btn-warning btn-lg speakerDetails" data-toggle="modal" value="<%=speaker._id%>" data-target="#myModal">Details</button></td>                  </tr>
+                 <%})%>
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+
+
+         <!-- Trigger the modal with a button -->
+       <!-- <button type="button" class="btn btn-info btn-lg open-AddBookDialog" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+       <!-- Modal -->
+       <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Speaker</h4>
+            </div>
+            <div class="modal-body">
+              <p id="modalData"> Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+
+
+<%- include('../footer') %>

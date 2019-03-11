@@ -1,0 +1,62 @@
+<%- include('../header') %>
+
+
+
+
+
+
+<div class="section-top-border">
+    <div class="row">
+        <div class="col-lg-6 text-center mx-auto">
+            <h3 class="mb-30">Login</h3>
+            <form  method="post" action="/login">
+                <div class="mt-10">
+                        <%=messageError%>
+                </div>
+                <div class="mt-10">
+                    <input type="text" name="userName" placeholder="User Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required class="single-input">
+                </div>
+                <div class="mt-10">
+                    <input type="password"  name="userPassword" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required class="single-input">
+                </div>
+                <div class="mt-10">
+
+            <input type="submit" value="Login" class="genric-btn success"/>
+
+            </div>
+
+
+           
+            </form>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <form method="post" action="/login">
+            <br/><br/>
+            <h2>
+                <%=messageError%>
+            </h2>
+            <br/><br/>
+           Name: <input type="text" name="userName" /><br/>
+           Password: <input type="password" name="userPassword" /><br/>
+            <input type="submit" value="Login" />
+        </form> -->
+
+<%- include('../footer') %>

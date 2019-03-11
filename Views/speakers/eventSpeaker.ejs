@@ -1,0 +1,41 @@
+<%- include('../headerSpeaker.ejs') %>
+
+
+        <div class="section-top-border text-center mx-auto">
+          <h3 class="mb-30">Event List</h3>
+          <div class="table-wrap text-center col-lg-12">
+              <table class="schdule-table table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                       
+
+                        <th class="name" scope="row">#</th>
+                        <th class="name" scope="row">title</th>
+                        <th class="name" scope="row">mainspeaker</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <%events.forEach((event)=>{%>
+                          <tr>
+                            <td><%=event._id%></td>
+                            <td><%=event.title%></td>
+                          
+                           
+        
+        
+                            <td><a href="#" class="btn btn-primary">Accept</a></td>
+                          <td><a href="/speakers/rejectEvent/<%=event._id%>" class="btn btn-danger">Reject</a></td>
+                          </tr>
+                         <%})%>
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+
+
+<%- include('../footer') %>
+
+

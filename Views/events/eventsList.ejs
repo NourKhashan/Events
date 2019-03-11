@@ -1,0 +1,60 @@
+<%- include('../headerAdmin.ejs') %>
+
+
+        <div class="section-top-border text-center mx-auto">
+          <h3 class="mb-30">Event List</h3>
+          <div class="table-wrap text-center col-lg-12">
+              <table class="schdule-table table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                       
+
+                        <th class="name" scope="row">#</th>
+                        <th class="name" scope="row">Title</th>
+                        <th class="name" scope="row">Date</th>
+                        <th class="name" scope="row">Main speaker</th>
+                        <th class="name" scope="row">Other Speakers</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <%events.forEach((event)=>{%>
+                          <tr>
+                            <td><%=event._id%></td>
+                            <td><%=event.title%></td>
+                            <td><%=event.eventDate.getFullYear() +'-' + (event.eventDate.getMonth()+1) + '-'+event.eventDate.getDate()%></td>
+                          
+                            <td class="name" scope="row">
+                              <%if(event.mainSpeaker != undefined){%> 
+                                <%=event.mainSpeaker.name%>
+                            <%}%>
+                            </td>
+                            <td>
+                              
+                               <% if(event.otherSpeakers != null){%>
+                                  <select>
+                                  <%event.otherSpeakers.forEach((speaker)=>{%>
+                                    <option><%=speaker.name%></option>
+                                  <%})%>
+                              </select>
+
+                                <%}%>
+                                
+        
+        
+                            </td>
+                            <td><a href="/events/edit/<%=event._id%>" class="btn btn-primary">EDIT</a></td>
+                          <td><a href="/events/delete/<%=event._id%>" class="btn btn-danger">Delete</a></td>
+                          </tr>
+                         <%})%>
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+
+
+<%- include('../footer') %>
+
+
