@@ -7,4 +7,4 @@ Password: 123
 
 -----------------------------------------
 Terminal
-npm start
+>npm start
