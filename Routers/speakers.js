@@ -146,13 +146,17 @@ speakerRouter.get("/edit/:id?",(request,reposne)=>{
     if(request.params.id == undefined){//Edit My Profile
         speakerSchema.findOne({userName: request.session.userName},(err,res)=>{
             speakerSchema.findOne({_id:res._id },(error,result)=>{
-            
+                console.log(result)
+                console.log("========================================================")
+                request.session.originalname = result.image;
                 reposne.render("speakers/editspeaker",{speaker:result})
             })
         });
     }else{
         speakerSchema.findOne({_id:request.params.id },(error,result)=>{
-        
+            console.log(result)
+            console.log("========================================================")
+            request.session.originalname = result.image;
             reposne.render("speakers/editspeaker",{speaker:result})
     })
 }
@@ -161,14 +165,25 @@ speakerRouter.get("/edit/:id?",(request,reposne)=>{
     
 });//edit get
 speakerRouter.post("/edit/:id?",upload.single("image"),(request,reposne)=>{
-    fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
-        console.log("File Renamed")
-    });
+    console.log("File: ", request.file)
+    console.log("jjj: ", request.session.originalname)
+    let originalname;
+    if(request.file != undefined){
+        fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
+            console.log("File Renamed")
+        });
+        originalname = request.file.originalname;
+    }else{
+        console.log("Else")
+    console.log("jjj: ", request.session.originalname)
+
+        originalname = request.session.originalname;
+    }
     speakerSchema.updateOne({_id:request.params.id},{
         $set:{
             name:request.body.name,
             age:request.body.age,
-            image: request.file.originalname,
+            image: originalname,
         }
     },(error)=>{
         if(!error)
