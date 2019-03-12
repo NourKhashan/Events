@@ -120,13 +120,19 @@ authRouter.get("/register",(request,resposne)=>{
     resposne.render("auth/register",{messageError: request.flash("registerError")})
 
 });//add get
+
+
 authRouter.post("/register",upload.single("image"),(request,reposne)=>{
     let userNameBody = new RegExp(request.body.userName,"i");
     console.log("Register: ", request.body)
-    fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
-        console.log("File Renamed")
-    });
 
+    let originalname = "";
+    if(request.file != undefined){
+        fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
+            console.log("File Renamed")
+        });
+        originalname = request.file.originalname;
+    }
     speakerSchema.findOne({userName: userNameBody}, (error, result)=>{
         if(result == null){
             bcrypt.hash(request.body.password, SALT, function (err,   hash) {
@@ -135,7 +141,7 @@ authRouter.post("/register",upload.single("image"),(request,reposne)=>{
                     _id:request.body.id,
                     name:request.body.name,
                     age:request.body.age,
-                    image: request.file.originalname,
+                    image: originalname,
 
                     userName: request.body.userName,
                     password: hash,

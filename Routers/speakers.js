@@ -103,10 +103,16 @@ speakerRouter.get("/add",(request,resposne)=>{
 speakerRouter.post("/add",upload.single("image"),(request,reposne)=>{
 console.log("file: ", request.file);
 
-fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
-    console.log("File Renamed")
-});
-console.log("file: ", request.file);
+ let originalname = "";
+if(request.file != undefined){
+    fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
+        console.log("File Renamed")
+        
+    });
+    originalname = request.file.originalname;
+
+    }
+
 bcrypt.hash(request.body.password, SALT, function (err,   hash) {
 
     //1- create object from schema
@@ -115,7 +121,7 @@ bcrypt.hash(request.body.password, SALT, function (err,   hash) {
        // _id:request.body.id,
         name:request.body.name,
         age:request.body.age,
-        image: request.file.originalname,
+        image: originalname,
         userName: request.body.userName,
         password: hash
     
@@ -165,8 +171,7 @@ speakerRouter.get("/edit/:id?",(request,reposne)=>{
     
 });//edit get
 speakerRouter.post("/edit/:id?",upload.single("image"),(request,reposne)=>{
-    console.log("File: ", request.file)
-    console.log("jjj: ", request.session.originalname)
+  
     let originalname;
     if(request.file != undefined){
         fs.rename(request.file.path, path.join(request.file.destination, request.file.originalname), (err)=>{
