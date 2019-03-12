@@ -8,3 +8,5 @@ Password: 123
 -----------------------------------------
 Terminal
 >npm start
+OR
+>nodemon server
